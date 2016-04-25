@@ -27,7 +27,7 @@ Just use pip!
 ~~~~~~~~~~~~
 
 In the `.otek` folder there's an `otekrc` which stores the defaults values for
-variables in JSON format.  It supports nested dictionaries
+variables in JSON format.  It supports full JSON.  To see how to use variables, read the next section.
 
 
 Templates
