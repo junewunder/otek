@@ -21,8 +21,8 @@ import json
 import subprocess
 import shutil
 
-from template import Template
-# from . import __version__ as VERSION
+from .template import Template
+from . import __version__ as VERSION
 
 
 class Otek:

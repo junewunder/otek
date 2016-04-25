@@ -2,6 +2,8 @@
 
 
 from codecs import open
+import os
+import shutil
 from os.path import abspath, dirname, join
 from subprocess import call
 
@@ -14,6 +16,10 @@ this_dir = abspath(dirname(__file__))
 with open(join(this_dir, 'README.rst'), encoding='utf-8') as file:
     long_description = file.read()
 
+# create home folder
+if not os.path.exists(os.environ['HOME'] + '/.otek/'):
+    dotOtek = __file__.replace('setup.py', 'dotOtek')
+    shutil.copytree(dotOtek, os.environ['HOME'])
 
 setup(
     name='otek',
@@ -30,13 +36,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
     ],
     keywords='project builder cli tool',
     packages=find_packages(exclude=['docs']),
