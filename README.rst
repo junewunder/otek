@@ -4,8 +4,8 @@ Otek
 Otek is a command line tool to help you make new projects with ease.
 
 Otek stores templates of projects so you don’t have to remake the same
-file structure every time your start a new project. Just make the
-template once and keep getting strated from that. Otek avoids being
+file structure every time your start developing a new idea. Just make the
+template once and keep getting started from that. Otek avoids being
 opinonated because the user knows what project format is best. This is
 different from projects like `yeoman`_ where the user has no control over their
 project structure.
