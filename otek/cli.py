@@ -48,8 +48,8 @@ class Otek:
             template = Template(self.settings)
             self.applyTemplate(template)
             if (os.path.exists(self.home + '/' + args['<name>'] + '/create')):
-                subprocess.call('/usr/bin/env bash ' + self.home + '/' + args['<name>'] + '/create', shell=True)
-                os.remove(os.getcwd() + '/create')
+                subprocess.call('/usr/bin/env bash {}/{}/create'.format(self.home, args['<name>']), shell=True)
+                os.remove(os.path.join(os.getcwd(), 'create'))
 
         elif args['add']:
             self.addTemplate(args['<path>'], args['<name>'])
@@ -67,13 +67,10 @@ class Otek:
                 self.applyTemplate(template, origin=fname)
 
             elif os.path.isfile(fname):
-                f = open(fname, mode='r+')
-                contents = f.read()
-                f.close()
-                compiled = template.compileContents(contents)
-                f = open(fname, mode='w+')
-                f.write(compiled)
-                f.close()
+                with open(fname, mode='r+') as f:
+                    compiled = template.compileContents(f.read())
+                with open(fname, mode='w+') as f:
+                    f.write(compiled)
 
             else:
                 raise Error('Found neither a file nor a folder in template application process')
@@ -83,22 +80,16 @@ class Otek:
         shutil.copytree(dotOtek, self.home)
 
     def readHomeFileConfig(self):
-        configFile = open(self.home + '/otekrc')
-        j = json.load(configFile)
-        configFile.close()
-        return j
+        with open(self.home + '/otekrc') as configFile:
+            return json.load(configFile)
 
     def readArgsConfig(self, argsList):
         argsList = [arg.split('=') for arg in argsList]
-        args = {}
-        for arg in argsList:
-            args[arg[0]] = arg[1]
-
-        return args
+        return {arg[0]: arg[1] for arg in argsList}
 
     def addTemplate(self, path, name):
         os.mkdir(self.home + '/' + name)
-        self.copyTemplateFolder(os.getcwd(), self.home + '/' + name)
+        self.copyTemplateFolder(os.getcwd(), os.path.join(self.home, name))
 
     def listTemplates(self):
         arr = glob.glob(self.home + '/*')
@@ -113,15 +104,14 @@ class Otek:
         for i, fname in enumerate(files):
 
             if os.path.isdir(fname):
-                os.mkdir(destination + '/' + fnames[i])
-                self.copyTemplateFolder(fname, destination + '/' + fnames[i])
+                fpath = os.path.join(destination, fnames[i])
+                os.mkdir(fpath)
+                self.copyTemplateFolder(fname, fpath)
 
             elif os.path.isfile(fname):
-                original = open(fname, mode='r+')
-                copy = open(destination + '/' + fnames[i], mode='w+')
-                copy.write(original.read())
-                original.close()
-                copy.close()
+                with open(fname, mode='r+') as original:
+                    with open(os.path.join(destination, fnames[i]), mode='w+') as copy:
+                        copy.write(original.read())
 
             else:
                 raise Error('Found neither a file nor a folder in copy process')
