@@ -20,7 +20,7 @@ if not os.path.exists(os.environ['HOME'] + '/.otek/'):
     # dotOtek = __file__.replace('setup.py', 'dotOtek')
     # shutil.copytree(dotOtek, os.environ['HOME'] + '/.otek/')
     os.mkdir(os.environ['HOME'] + '/.otek/')
-    with open(os.environ['HOME'] + '/.otek/ortekrc', 'w+') as file:
+    with open(os.environ['HOME'] + '/.otek/otekrc', 'w+') as file:
         file.write('{}')
 
 setup(
