@@ -6,7 +6,6 @@ import os
 import shutil
 from os.path import abspath, dirname, join
 from subprocess import call
-
 from setuptools import find_packages, setup
 
 from otek import __version__
@@ -18,8 +17,11 @@ with open(join(this_dir, 'README.rst'), encoding='utf-8') as file:
 
 # create home folder
 if not os.path.exists(os.environ['HOME'] + '/.otek/'):
-    dotOtek = __file__.replace('setup.py', 'dotOtek')
-    shutil.copytree(dotOtek, os.environ['HOME'])
+    # dotOtek = __file__.replace('setup.py', 'dotOtek')
+    # shutil.copytree(dotOtek, os.environ['HOME'] + '/.otek/')
+    os.mkdir(os.environ['HOME'] + '/.otek/')
+    with open(os.environ['HOME'] + '/.otek/ortekrc', 'w+') as file:
+        file.write('{}')
 
 setup(
     name='otek',
