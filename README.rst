@@ -64,7 +64,7 @@ the `-v` flag followed by a variable name. WARNING: only works for top-level var
 
 .. code:: bash
 
-    otek create example-project -v name="NOT JACOB WUNDER"
+    otek create example-project -v name="Linus Torvalds"
 
 Now value of `name` is 'Linus Torvalds' so the `__author__` will be Linus Torvalds
 
