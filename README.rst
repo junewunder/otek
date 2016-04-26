@@ -75,16 +75,16 @@ Now value of `name` is 'Linus Torvalds' so the `__author__` will be Linus Torval
 
     print('hello, world.  This is the example-project ')
 
-`create` Script
+``create`` Script
 ~~~~~~~~~~~~~~~
 
-Need more than files to create your project?  Just create a file called `create`
+Need more than files to create your project?  Just create a file called ``create``
 which will be run upon creation time as a bash script.  This could be used to
 run `npm init` or `npm install` if you already have a default package.json.
 
 Roadmap
 ~~~~~~~
 
-  -  Download other people’s project templates using github in a similar way to homebrew formulae
+ -  Download other people’s project templates using github in a similar way to homebrew formulae
 
 .. _yeoman: http://yeoman.io
