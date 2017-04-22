@@ -1,0 +1,31 @@
+{
+  "name": "otek",
+  "version": "1.0.0",
+  "description": "otek",
+  "main": "main.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo no"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaywunder/otek.git"
+  },
+  "keywords": [
+    "otek"
+  ],
+  "author": "Jacob Wunder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaywunder/otek/issues"
+  },
+  "homepage": "https://github.com/jaywunder/otek#readme",
+  "dependencies": {
+    "parser-combinator": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1"
+  }
+}
