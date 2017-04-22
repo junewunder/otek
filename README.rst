@@ -29,6 +29,15 @@ Just use pip!
 In the `.otek` folder there's an `otekrc` which stores the defaults values for
 variables in JSON format.  It supports full JSON.  To see how to use variables, read the next section.
 
+otekrc Variables
+~~~~~~~~~~~~~~~~
+
+There are some variables predefined by otek.  Here are the default values of each variable.
+
+`PROJNAME` : The name of the folder
+`STARTEXPR` : `%>`
+`ENDEXPR` : `%>`
+
 
 Templates
 ~~~~~~~~~
@@ -86,5 +95,6 @@ Roadmap
 ~~~~~~~
 
  -  Download other people’s project templates using github in a similar way to homebrew formulae
+ -  Allow for a project-local otek folder to allow for otek templates specific to a project
 
 .. _yeoman: http://yeoman.io

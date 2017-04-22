@@ -1,0 +1,11 @@
+[package]
+authors = ["jaywunder <jaywunder@gmail.com>"]
+name = "otek"
+version = "0.1.0"
+
+[dependencies]
+regex = "0.1.80"
+
+[dependencies.nom]
+nom = "2.2.1"
+features = ["regexp"]
