@@ -6,6 +6,4 @@ pub struct OtekState {
 
 impl OtekState {
 
-
-
 }

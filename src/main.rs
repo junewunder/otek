@@ -11,12 +11,10 @@
 /// -h --help show this text
 /// -v --vars key="value" variables to replace in the template project
 
-#[macro_use]
-extern crate nom;
-extern crate regex;
-
-mod syntax;
+mod template;
 mod state;
+
+use template::syntax;
 
 use std::io::prelude::*;
 use std::fs;
@@ -24,19 +22,25 @@ use std::path::{ Path, PathBuf };
 use std::io::Result;
 use std::fs::File;
 
-// use syntax::OtekSyntax;
-use state::OtekState;
-
 fn main() {
-    println!("");
 
-    let to = Path::new("/Users/jacob/Desktop/tocopy");
-    let from = Path::new("/Users/jacob/Desktop/thecopy");
+    let test = "cole ( sucks )";
 
-    copy_folder(to, from);
-
-    println!("");
+    println!("{} = {:?}",
+        test, syntax::parse_File(test));
 }
+
+
+// fn main() {
+//     println!("");
+//
+//     let to = Path::new("/Users/jacob/Desktop/tocopy");
+//     let from = Path::new("/Users/jacob/Desktop/thecopy");
+//
+//     copy_folder(to, from);
+//
+//     println!("");
+// }
 
 fn copy_folder(from_path: &Path, to_path: &Path) -> Result<()> {
     for entry in fs::read_dir(from_path)? {
