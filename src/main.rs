@@ -11,10 +11,10 @@
 /// -h --help show this text
 /// -v --vars key="value" variables to replace in the template project
 
+extern crate regex;
+
 mod template;
 mod state;
-
-use template::syntax;
 
 use std::io::prelude::*;
 use std::fs;
@@ -24,10 +24,10 @@ use std::fs::File;
 
 fn main() {
 
-    let test = "cole ( sucks )";
+    let test = "cole ((( sucks, su-_023434234cks     ))) ((HEYYY)) ";
 
-    println!("{} = {:?}",
-        test, syntax::parse_File(test));
+    template::process(test.to_string());
+
 }
 
 

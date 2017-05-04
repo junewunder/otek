@@ -1,66 +1,38 @@
 use std::str::FromStr;
-use template::ast::vec_to_string;
+use template::ast::Token;
 
-// TODO: Take open and close as input parameters
 grammar;
 
-pub File: Vec<String> = {
-    TemplatePiece<"(", ")">*
-};
-
-
-
-TemplatePiece<Open, Close>: String = {
-    // <text:Text<r"[[:alpha:]]">*> <r:( <Text<r"[[:alpha:]]*">> )> => {
-    // <text:Text<r".*\(">> <r:( Open <Text<r".*">> Close )?> => {
-    <text:Text> Open <replacement:Text> Close => {
-        let mut out = String::new();
-
-        out.push_str(text.as_str());
-        out.push_str(" ,,,,,,,, ");
-        out.push_str(replacement.as_str());
-
-        // if let Some(replacement) = Some(r) {
-        //     out.push_str(replacement.as_str());
-        // }
-
-        out
+pub Template: Vec<Token> = {
+    <v: (<Var> ",")*> <e: Var?> => {
+        match e {
+            None => v,
+            Some(e) => {
+                let mut v = v;
+                v.push(e);
+                v
+            }
+        }
     }
 };
 
-//////////// MORE THINGS
-
-// QuotedText: String = {
-//     "'" <text:r"[^'\n\r]"*> "'" =>
-//         text.into_iter()
-//             .fold(String::new(), |mut acc, l| { acc.push_str(&l); acc }),
-//     "\"" <text:r#"[^"\n\r]"#*> "\"" =>
-//         text.into_iter()
-//             .fold(String::new(),|mut acc, l| { acc.push_str(&l); acc }),
-// };
-
-Text: String = {
-    r"[[:ascii:]]*" => String::from(<>)
-    //vec_to_string(&tvec)
-        // tvec.into_iter()
-        //     .fold(String::new(), |mut acc, l| { acc.push_str(&l); acc })
+pub Var: Token = {
+    <r"[[:alpha:]-_][[:alpha:]\d-_]+"> => Token::Var(String::from(<>)),
 };
 
-// Num: i32 = {
-//     r"[0-9]+" => i32::from_str(<>).unwrap(),
+// QuotedText: String = {
+//     "'"  <r"[^'\n\r]*">   "'"  => String::from(<>),
+//     "\"" <r#"[^"\n\r]*"#> "\"" => String::from(<>),
 // };
 
+// OrBar:
 
-// match { "(" }
-// else  { ")" }
-// else  { r"[[:ascii:]]*" }
-// else  { r"[0-9]+" }
-// else  { _ }
+Num: i32 = {
+    r"[\d]+" => i32::from_str(<>).unwrap(),
+};
 
-// match { r"[^'\n\r]"}
-// else  { r".*\(" }
-// else  { r"[^)]*" }
-// else  { r"[^(]*" }
-// else  { r#"[^"\n\r]"# }
-// else  { r"[0-9]+" }
-// else  { _ }
+match {r"[[:alpha:]-_][[:alpha:]\d-_]+"}
+// else {r"[\d]+"}
+// else {r"[^'\n\r]*"}
+// else {r#"[^"\n\r]*"#}
+else { _ }

@@ -1,5 +1,19 @@
 
-pub fn vec_to_string<'a>(v: &Vec<&'a str>) -> String {
-    v.into_iter()
-    .fold(String::new(), |mut acc, l| { acc.push_str(&l); acc })
+#[derive(Debug)]
+pub enum Token {
+
+    Var(String),
+
+    Or,
+
+    QuotedText(String),
+
+    // Var_Or(Option<Box<Token>>, String),
+
+}
+
+#[derive(Debug)]
+pub enum TextType {
+    Text(String),
+    Template(String),
 }
